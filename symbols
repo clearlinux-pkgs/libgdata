@@ -702,6 +702,9 @@ libgdata.so.22:gdata_generator_get_name
 libgdata.so.22:gdata_generator_get_type
 libgdata.so.22:gdata_generator_get_uri
 libgdata.so.22:gdata_generator_get_version
+libgdata.so.22:gdata_goa_authorizer_get_goa_object
+libgdata.so.22:gdata_goa_authorizer_get_type
+libgdata.so.22:gdata_goa_authorizer_new
 libgdata.so.22:gdata_link_get_content_type
 libgdata.so.22:gdata_link_get_language
 libgdata.so.22:gdata_link_get_length

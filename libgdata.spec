@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.17.4
-Release  : 2
+Release  : 3
 URL      : https://download.gnome.org/core/3.20/3.20.2/sources/libgdata-0.17.4.tar.xz
 Source0  : https://download.gnome.org/core/3.20/3.20.2/sources/libgdata-0.17.4.tar.xz
 Summary  : GData client library
@@ -24,6 +24,7 @@ BuildRequires : libxslt-bin
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(gcr-base-3)
 BuildRequires : pkgconfig(gdk-pixbuf-2.0)
+BuildRequires : pkgconfig(goa-1.0)
 BuildRequires : pkgconfig(gtk+-3.0)
 BuildRequires : pkgconfig(json-glib-1.0)
 BuildRequires : pkgconfig(libsoup-2.4)
@@ -87,7 +88,7 @@ locales components for the libgdata package.
 
 %build
 export LANG=C
-%configure --disable-static --disable-goa
+%configure --disable-static
 make V=1  %{?_smp_mflags}
 
 %check
@@ -147,6 +148,7 @@ rm -rf %{buildroot}
 /usr/include/libgdata/gdata/gdata-entry.h
 /usr/include/libgdata/gdata/gdata-enums.h
 /usr/include/libgdata/gdata/gdata-feed.h
+/usr/include/libgdata/gdata/gdata-goa-authorizer.h
 /usr/include/libgdata/gdata/gdata-oauth1-authorizer.h
 /usr/include/libgdata/gdata/gdata-oauth2-authorizer.h
 /usr/include/libgdata/gdata/gdata-parsable.h
