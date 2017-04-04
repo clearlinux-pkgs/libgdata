@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.17.7
-Release  : 5
+Release  : 6
 URL      : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.7.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.7.tar.xz
 Summary  : GData client library
@@ -13,6 +13,7 @@ License  : LGPL-2.1
 Requires: libgdata-lib
 Requires: libgdata-doc
 Requires: libgdata-locales
+Requires: libgdata-data
 BuildRequires : docbook-xml
 BuildRequires : gettext
 BuildRequires : gobject-introspection-dev
@@ -38,10 +39,19 @@ libgdata is a GLib-based library for accessing online service APIs using the
 GData protocol --- most notably, Google's services. It provides APIs to access
 the common Google services, and has full asynchronous support.
 
+%package data
+Summary: data components for the libgdata package.
+Group: Data
+
+%description data
+data components for the libgdata package.
+
+
 %package dev
 Summary: dev components for the libgdata package.
 Group: Development
 Requires: libgdata-lib
+Requires: libgdata-data
 Provides: libgdata-devel
 
 %description dev
@@ -59,6 +69,7 @@ doc components for the libgdata package.
 %package lib
 Summary: lib components for the libgdata package.
 Group: Libraries
+Requires: libgdata-data
 
 %description lib
 lib components for the libgdata package.
@@ -77,7 +88,7 @@ locales components for the libgdata package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1489096103
+export SOURCE_DATE_EPOCH=1491323158
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -89,13 +100,18 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1489096103
+export SOURCE_DATE_EPOCH=1491323158
 rm -rf %{buildroot}
 %make_install
 %find_lang gdata
 
 %files
 %defattr(-,root,root,-)
+
+%files data
+%defattr(-,root,root,-)
+/usr/lib64/girepository-1.0/GData-0.0.typelib
+/usr/share/gir-1.0/*.gir
 
 %files dev
 %defattr(-,root,root,-)
@@ -204,10 +220,8 @@ rm -rf %{buildroot}
 /usr/include/libgdata/gdata/services/youtube/gdata-youtube-service.h
 /usr/include/libgdata/gdata/services/youtube/gdata-youtube-state.h
 /usr/include/libgdata/gdata/services/youtube/gdata-youtube-video.h
-/usr/lib64/girepository-1.0/GData-0.0.typelib
 /usr/lib64/libgdata.so
 /usr/lib64/pkgconfig/libgdata.pc
-/usr/share/gir-1.0/*.gir
 
 %files doc
 %defattr(-,root,root,-)
