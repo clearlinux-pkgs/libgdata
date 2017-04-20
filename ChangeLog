@@ -1,6 +1,208 @@
+commit d10155034b0fa2e43e2889e55157798ce073f807
+Author: Philip Withnall <withnall@endlessm.com>
+Date:   Thu Apr 20 11:50:09 2017 +0100
+
+    tasks: Re-add ISO 8601 formatting workaround for Tasks service
+
+    This partially reverts commit 684f95e8845be4f9efc434ea6456bee99b2303ac
+    for the Tasks service only, since it is the only service which
+    currently
+    requires a formatting workaround for ISO 8601 date timezones.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=780067
+
+    Signed-off-by: Philip Withnall <withnall@endlessm.com>
+
+M	gdata/gdata-parser.c
+M	gdata/gdata-parser.h
+M	gdata/services/tasks/gdata-tasks-query.c
+M	gdata/services/tasks/gdata-tasks-task.c
+M	gdata/services/tasks/gdata-tasks-tasklist.c
+M	gdata/tests/tasks.c
+
+commit 61659ca68638dbccf3f1dbba8927f053b301de40
+Author: Yuras Shumovich <shumovichy@gmail.com>
+Date:	Tue Apr 18 09:34:32 2017 +0000
+
+    Update Belarusian translation
+
+M	po/be.po
+
+commit 3ae207e406fa98ac2f65eb83d43bf1e1e4e54477
+Author: Cédric Valmary <cvalmary@yahoo.fr>
+Date:	Wed Apr 12 07:58:23 2017 +0000
+
+    Update Occitan translation
+
+M	po/oc.po
+
+commit d93f654cce34aff9eff257eabe28636b608018c0
+Author: Tom Tryfonidis <tomtryf@gnome.org>
+Date:	Fri Apr 7 10:37:34 2017 +0000
+
+    Update Greek translation
+
+M	po/el.po
+
+commit b87141e748b108cd9e56a70635a6ade097d54ab5
+Author: Emmanuele Bassi <ebassi@gnome.org>
+Date:	Sat Mar 25 15:27:33 2017 +0000
+
+    Use the correct type for gtk_show_uri_for_window()
+
+M	demos/scrapbook/scrapbook.c
+
+commit b1115818eb0aa8d8f171df06c7a2e9a6fbac073c
+Author: Emmanuele Bassi <ebassi@gnome.org>
+Date:	Sat Mar 25 15:16:48 2017 +0000
+
+    demos: Use non-deprecated API
+
+    Otherwise the build will fail with the default -Werror settings.
+
+M	demos/scrapbook/scrapbook.c
+
+commit d6abf285fd387f6bb74fe2f281c539323aa7fe76
+Author: Yuri Myasoedov <ymyasoedov@yandex.ru>
+Date:	Sat Mar 18 10:50:17 2017 +0400
+
+    Updated Russian translation
+
+M	po/ru.po
+
+commit 25225e375ec64a0e4b822c4db8bace07deea78d4
+Author: Philip Withnall <withnall@endlessm.com>
+Date:	Wed Mar 15 12:14:53 2017 +0000
+
+    build: Bump libsoup dependency for streams test to 2.55.90
+
+    Previously the streams test depended on new API added in libsoup
+    2.47.3.
+    It still depends on that API, but it’s become apparent that there
+    was a
+    bug in libsoup which rendered soup_server_set_ssl_cert_file() useless
+    until libsoup 2.55.90.
+
+    Bump the dependency (for the test code only) to 2.55.90.
+
+    Thanks to Mart Raudsepp for their help in debugging.
+
+    Signed-off-by: Philip Withnall <withnall@endlessm.com>
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=780081
+
+M	configure.ac
+M	gdata/tests/streams.c
+
+commit 192bcf3ec7752aaf03f19a1f801a9d66cf306a69
+Author: Philip Withnall <withnall@endlessm.com>
+Date:	Wed Mar 15 11:14:06 2017 +0000
+
+    build: Bump minimum GLib dependency to 2.38.0
+
+    Since the 0.17.7 release, we’ve actually depended on API from GLib
+    2.38.0 (G_TEST_DIST), so this will just cause earlier build failure
+    than
+    before.
+
+    This means we can drop some backwards compatibility code for
+    older GLib
+    releases.
+
+    Spotted by Mart Raudsepp in
+    https://bugzilla.gnome.org/show_bug.cgi?id=780081#c1.
+
+    Signed-off-by: Philip Withnall <withnall@endlessm.com>
+
+M	README
+M	configure.ac
+M	demos/scrapbook/scrapbook.c
+M	gdata/tests/common.c
+
+commit 684f95e8845be4f9efc434ea6456bee99b2303ac
+Author: Philip Withnall <philip@tecnocode.co.uk>
+Date:	Tue Mar 14 23:34:55 2017 +0000
+
+    Revert "core: Re-add ISO 8601 formatting workaround for dates"
+
+    This reverts commit bfbd4f5ca493f17fe2300e54092a4ec27f65ea08.
+
+    Google have fixed their servers and now reject the workaround
+    timestamp
+    format.
+
+    Unfortunately, because nothing is ever easy, this breaks Google Tasks.
+    Obviously something else is wrong there.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=780067
+
+M	gdata/gdata-parser.c
+M	gdata/tests/calendar.c
+M	gdata/tests/general.c
+M	gdata/tests/tasks.c
+
+commit a4626e29b91101d6b8b984ec2bea5370f04be2fb
+Author: Jiri Grönroos <jiri.gronroos@iki.fi>
+Date:	Sat Mar 11 16:46:16 2017 +0000
+
+    Update Finnish translation
+
+M	po/fi.po
+
+commit 0ad0d713eb5812b9529791ff01d69859d06da2ab
+Author: Fran Dieguez <frandieguez@gnome.org>
+Date:	Sat Mar 11 03:08:38 2017 +0000
+
+    Update Galician translation
+
+M	po/gl.po
+
+commit 68ba2c0b7b5c6325365f7f809448974c108e8e16
+Author: Alan Mortensen <alanmortensen.am@gmail.com>
+Date:	Mon Mar 6 12:47:35 2017 +0100
+
+    Updated Danish translation
+
+M	po/da.po
+
+commit 2e1bd073426b42a7e207314f1cef1402509ce12a
+Author: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
+Date:	Mon Mar 6 06:28:32 2017 +0100
+
+    tests: Fix setting properties on i686
+
+    Without the cast, an integer literal will have to wrong size for a
+    64-bit integer parameter.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=779641
+
+M	gdata/tests/general.c
+
+commit 23b228110a122b2f0e8752ac2291b995d80347a5
+Author: Philip Withnall <philip@tecnocode.co.uk>
+Date:	Sun Mar 5 21:14:03 2017 +0000
+
+    build: Increment version to 0.17.8
+
+M	configure.ac
+
+commit 209aa98488bbc08e54b41faad8b65426ac62ae32
+Author: Philip Withnall <philip@tecnocode.co.uk>
+Date:	Sun Mar 5 21:12:29 2017 +0000
+
+    Release version 0.17.7
+
+M	NEWS
+M	configure.ac
+M	docs/reference/gdata-docs.xml
+M	gdata/gdata-feed.c
+M	gdata/gdata-parsable.c
+M	gdata/services/documents/gdata-documents-entry.c
+M	gdata/services/documents/gdata-documents-utils.c
+
 commit 0d8ed048c0ed7d3546232526cc60b8daaded4a00
 Author: Philip Withnall <philip@tecnocode.co.uk>
-Date:   Sun Mar 5 20:19:25 2017 +0000
+Date:	Sun Mar 5 20:19:25 2017 +0000
 
     build: Distclean default.profraw files
 
