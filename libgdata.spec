@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.17.9
-Release  : 9
+Release  : 10
 URL      : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.9.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.9.tar.xz
 Summary  : GData client library
