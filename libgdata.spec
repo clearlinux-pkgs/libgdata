@@ -4,19 +4,19 @@
 #
 Name     : libgdata
 Version  : 0.17.9
-Release  : 11
+Release  : 12
 URL      : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.9.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.9.tar.xz
-Summary  : GData client library
+Summary  : GLib-based library for accessing online service APIs using the GData protocol
 Group    : Development/Tools
 License  : LGPL-2.1
-Requires: libgdata-lib
-Requires: libgdata-doc
-Requires: libgdata-locales
-Requires: libgdata-data
+Requires: libgdata-data = %{version}-%{release}
+Requires: libgdata-lib = %{version}-%{release}
+Requires: libgdata-license = %{version}-%{release}
+Requires: libgdata-locales = %{version}-%{release}
+BuildRequires : buildreq-gnome
 BuildRequires : docbook-xml
 BuildRequires : gettext
-BuildRequires : gobject-introspection-dev
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
 BuildRequires : intltool
@@ -50,9 +50,10 @@ data components for the libgdata package.
 %package dev
 Summary: dev components for the libgdata package.
 Group: Development
-Requires: libgdata-lib
-Requires: libgdata-data
-Provides: libgdata-devel
+Requires: libgdata-lib = %{version}-%{release}
+Requires: libgdata-data = %{version}-%{release}
+Provides: libgdata-devel = %{version}-%{release}
+Requires: libgdata = %{version}-%{release}
 
 %description dev
 dev components for the libgdata package.
@@ -69,10 +70,19 @@ doc components for the libgdata package.
 %package lib
 Summary: lib components for the libgdata package.
 Group: Libraries
-Requires: libgdata-data
+Requires: libgdata-data = %{version}-%{release}
+Requires: libgdata-license = %{version}-%{release}
 
 %description lib
 lib components for the libgdata package.
+
+
+%package license
+Summary: license components for the libgdata package.
+Group: Default
+
+%description license
+license components for the libgdata package.
 
 
 %package locales
@@ -91,9 +101,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1503493404
+export SOURCE_DATE_EPOCH=1557015037
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -103,8 +120,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1503493404
+export SOURCE_DATE_EPOCH=1557015037
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/libgdata
+cp COPYING %{buildroot}/usr/share/package-licenses/libgdata/COPYING
 %make_install
 %find_lang gdata
 
@@ -115,6 +134,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/lib64/girepository-1.0/GData-0.0.typelib
 /usr/share/gir-1.0/*.gir
+/usr/share/vala/vapi/libgdata.deps
+/usr/share/vala/vapi/libgdata.vapi
 
 %files dev
 %defattr(-,root,root,-)
@@ -228,7 +249,7 @@ rm -rf %{buildroot}
 /usr/lib64/pkgconfig/libgdata.pc
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/gtk-doc/html/gdata/GDataAPPCategories.html
 /usr/share/gtk-doc/html/gdata/GDataAccessHandler.html
 /usr/share/gtk-doc/html/gdata/GDataAccessRule.html
@@ -373,6 +394,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/lib64/libgdata.so.22
 /usr/lib64/libgdata.so.22.3.0
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libgdata/COPYING
 
 %files locales -f gdata.lang
 %defattr(-,root,root,-)
