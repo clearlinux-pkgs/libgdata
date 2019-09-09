@@ -1,3 +1,67 @@
+Overview of changes from libgdata 0.17.10 to libgdata 0.17.11
+=============================================================
+
+* Various fixes to the Meson port, including a soversion fix (#30, #32, #35, !9, !10)
+
+* Add support for user-specified properties of documents in Drive (!7)
+
+* Bugs fixed:
+ - #30 meson: debug messages of libgdata don't come from correct log domain - "libgdata"
+ - #31 gdata_entry_get_id should not free current value if not changed
+ - #32 Build failure on Continuous
+ - #33 en_GBism in a string
+ - #35 Installed tests fails with an assert in gdata_oauth2_authorizer_request_authorization
+ - !7 Drive v2 Properties API
+ - !9 Meson fixes
+ - !10 meson minor fixes
+ - !13 docs: Drop use of `<!-- -->` to delimit plurals
+ - !16 Minor revision of italian translation (after >2ys)
+
+* Translation updates:
+ - Basque
+ - Czech
+ - English (United Kingdom)
+ - German
+ - Indonesian
+ - Italian
+ - Lithuanian
+ - Polish
+ - Portuguese (Brazil)
+ - Romanian
+ - Spanish
+ - Swedish
+
+
+Overview of changes from libgdata 0.17.9 to libgdata 0.17.10
+============================================================
+
+* Port to Meson and drop autotools support (#27)
+
+* Migrate from intltool to gettext (bug #787252)
+
+* Bugs fixed:
+ - #26 Support deleting shared Google Drive files
+ - #27 Port to Meson
+ - !1 Remove use of foreach with wrong function prototype and use g_list_free_full
+ - !3 core: Move the header guards before including other headers
+ - !4 tasks: Turn 'position' and 'parent' into writable properties
+ - Bug 787252 — [Patch] Migrate from intltool to gettext
+
+* Translation updates:
+ - Catalan
+ - Chinese (Taiwan)
+ - Croatian
+ - Danish
+ - Dutch
+ - English (United Kingdom)
+ - Esperanto
+ - French
+ - Indonesian
+ - Nepali
+ - Romanian
+ - Turkish
+
+
 Overview of changes from libgdata 0.17.8 to libgdata 0.17.9
 ===========================================================
 
