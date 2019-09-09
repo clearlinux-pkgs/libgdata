@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.17.11
-Release  : 13
+Release  : 14
 URL      : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.11.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.11.tar.xz
 Summary  : GLib-based library for accessing online service APIs using the GData protocol
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1568047885
+export SOURCE_DATE_EPOCH=1568049244
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
