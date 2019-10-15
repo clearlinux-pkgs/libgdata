@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.17.11
-Release  : 14
+Release  : 15
 URL      : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.11.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.11.tar.xz
 Summary  : GLib-based library for accessing online service APIs using the GData protocol
