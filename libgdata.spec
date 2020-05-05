@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.17.12
-Release  : 18
+Release  : 19
 URL      : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.12.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.12.tar.xz
 Summary  : No detailed summary available
@@ -12,12 +12,12 @@ Group    : Development/Tools
 License  : LGPL-2.1
 Requires: libgdata-data = %{version}-%{release}
 Requires: libgdata-lib = %{version}-%{release}
-Requires: libgdata-libexec = %{version}-%{release}
 Requires: libgdata-license = %{version}-%{release}
 Requires: libgdata-locales = %{version}-%{release}
 BuildRequires : buildreq-gnome
 BuildRequires : buildreq-meson
 BuildRequires : docbook-xml
+BuildRequires : gsettings-desktop-schemas
 BuildRequires : gtk-doc
 BuildRequires : pkgconfig(gcr-base-3)
 BuildRequires : pkgconfig(goa-1.0)
@@ -64,20 +64,10 @@ doc components for the libgdata package.
 Summary: lib components for the libgdata package.
 Group: Libraries
 Requires: libgdata-data = %{version}-%{release}
-Requires: libgdata-libexec = %{version}-%{release}
 Requires: libgdata-license = %{version}-%{release}
 
 %description lib
 lib components for the libgdata package.
-
-
-%package libexec
-Summary: libexec components for the libgdata package.
-Group: Default
-Requires: libgdata-license = %{version}-%{release}
-
-%description libexec
-libexec components for the libgdata package.
 
 
 %package license
@@ -96,6 +86,16 @@ Group: Default
 locales components for the libgdata package.
 
 
+%package tests
+Summary: tests components for the libgdata package.
+Group: Default
+Requires: libgdata = %{version}-%{release}
+Requires: gsettings-desktop-schemas
+
+%description tests
+tests components for the libgdata package.
+
+
 %prep
 %setup -q -n libgdata-0.17.12
 cd %{_builddir}/libgdata-0.17.12
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1586898740
+export SOURCE_DATE_EPOCH=1588777982
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -114,7 +114,7 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dinstalled_tests=true  builddir
 ninja -v -C builddir
 
 %install
@@ -130,17 +130,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %defattr(-,root,root,-)
 /usr/lib64/girepository-1.0/GData-0.0.typelib
 /usr/share/gir-1.0/*.gir
-/usr/share/installed-tests/libgdata/authorization.test
-/usr/share/installed-tests/libgdata/buffer.test
-/usr/share/installed-tests/libgdata/calendar.test
-/usr/share/installed-tests/libgdata/contacts.test
-/usr/share/installed-tests/libgdata/general.test
-/usr/share/installed-tests/libgdata/oauth1-authorizer.test
-/usr/share/installed-tests/libgdata/oauth2-authorizer.test
-/usr/share/installed-tests/libgdata/perf.test
-/usr/share/installed-tests/libgdata/streams.test
-/usr/share/installed-tests/libgdata/tasks.test
-/usr/share/installed-tests/libgdata/youtube.test
 /usr/share/vala/vapi/libgdata.deps
 /usr/share/vala/vapi/libgdata.vapi
 
@@ -431,7 +420,11 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/lib64/libgdata.so.22
 /usr/lib64/libgdata.so.22.5.1
 
-%files libexec
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libgdata/caeb68c46fa36651acf592771d09de7937926bb3
+
+%files tests
 %defattr(-,root,root,-)
 /usr/libexec/installed-tests/libgdata/authorization
 /usr/libexec/installed-tests/libgdata/buffer
@@ -768,10 +761,17 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/libexec/installed-tests/libgdata/traces/youtube/upload-async-cancellation
 /usr/libexec/installed-tests/libgdata/traces/youtube/upload-simple
 /usr/libexec/installed-tests/libgdata/youtube
-
-%files license
-%defattr(0644,root,root,0755)
-/usr/share/package-licenses/libgdata/caeb68c46fa36651acf592771d09de7937926bb3
+/usr/share/installed-tests/libgdata/authorization.test
+/usr/share/installed-tests/libgdata/buffer.test
+/usr/share/installed-tests/libgdata/calendar.test
+/usr/share/installed-tests/libgdata/contacts.test
+/usr/share/installed-tests/libgdata/general.test
+/usr/share/installed-tests/libgdata/oauth1-authorizer.test
+/usr/share/installed-tests/libgdata/oauth2-authorizer.test
+/usr/share/installed-tests/libgdata/perf.test
+/usr/share/installed-tests/libgdata/streams.test
+/usr/share/installed-tests/libgdata/tasks.test
+/usr/share/installed-tests/libgdata/youtube.test
 
 %files locales -f gdata.lang
 %defattr(-,root,root,-)
