@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.17.13
-Release  : 20
+Release  : 21
 URL      : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.13.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.13.tar.xz
 Summary  : No detailed summary available
