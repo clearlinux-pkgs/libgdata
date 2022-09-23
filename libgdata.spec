@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.18.1
-Release  : 24
+Release  : 25
 URL      : https://download.gnome.org/sources/libgdata/0.18/libgdata-0.18.1.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.18/libgdata-0.18.1.tar.xz
 Summary  : No detailed summary available
