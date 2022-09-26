@@ -4,7 +4,7 @@
 #
 Name     : libgdata
 Version  : 0.18.1
-Release  : 25
+Release  : 26
 URL      : https://download.gnome.org/sources/libgdata/0.18/libgdata-0.18.1.tar.xz
 Source0  : https://download.gnome.org/sources/libgdata/0.18/libgdata-0.18.1.tar.xz
 Summary  : No detailed summary available
@@ -16,7 +16,6 @@ Requires: libgdata-license = %{version}-%{release}
 Requires: libgdata-locales = %{version}-%{release}
 BuildRequires : buildreq-gnome
 BuildRequires : buildreq-meson
-BuildRequires : gsettings-desktop-schemas
 BuildRequires : gtk-doc
 BuildRequires : pkgconfig(gcr-base-3)
 BuildRequires : pkgconfig(goa-1.0)
@@ -96,21 +95,21 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1615222229
+export SOURCE_DATE_EPOCH=1664157044
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dinstalled_tests=true  builddir
 ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/libgdata
-cp %{_builddir}/libgdata-0.18.1/COPYING %{buildroot}/usr/share/package-licenses/libgdata/caeb68c46fa36651acf592771d09de7937926bb3
+cp %{_builddir}/libgdata-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libgdata/caeb68c46fa36651acf592771d09de7937926bb3 || :
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang gdata
 
